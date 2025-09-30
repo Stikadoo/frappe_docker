@@ -2,13 +2,14 @@ version: "3"
 
 services:
   backend:
-    build:
-      context: .
-      dockerfile: images/layered/Containerfile
-      args:
-        FRAPPE_PATH: https://github.com/frappe/frappe
-        FRAPPE_BRANCH: version-15
-        APPS_JSON_BASE64: ${APPS_JSON_BASE64}
+    # build:
+    #   context: .
+    #   dockerfile: images/layered/Containerfile
+    #   args:
+    #     FRAPPE_PATH: https://github.com/frappe/frappe
+    #     FRAPPE_BRANCH: version-15
+    #     APPS_JSON_BASE64: ${APPS_JSON_BASE64}
+    image: frappe/erpnext:v15.80.1
     networks:
       - frappe_network
     deploy:
