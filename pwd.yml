@@ -51,7 +51,7 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   create-site:
-    image: frappe/erpnext:v15.80.0
+    image: frappe/erpnext:v15.85.1
     networks:
       - frappe_network
     deploy:
@@ -106,7 +106,7 @@ services:
       - db-data:/var/lib/mysql
 
   frontend:
-    image: frappe/erpnext:v15.80.0
+    image: frappe/erpnext:v15.85.1
     networks:
       - frappe_network
     depends_on:
@@ -132,7 +132,7 @@ services:
       - "8081:8080"
 
   queue-long:
-    image: frappe/erpnext:v15.80.0
+    image: frappe/erpnext:v15.85.1
     networks:
       - frappe_network
     deploy:
@@ -146,9 +146,12 @@ services:
     volumes:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
+    environment:
+      FRAPPE_REDIS_CACHE: redis://redis-cache:6379
+      FRAPPE_REDIS_QUEUE: redis://redis-queue:6379
 
   queue-short:
-    image: frappe/erpnext:v15.80.0
+    image: frappe/erpnext:v15.85.1
     networks:
       - frappe_network
     deploy:
@@ -162,6 +165,9 @@ services:
     volumes:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
+    environment:
+      FRAPPE_REDIS_CACHE: redis://redis-cache:6379
+      FRAPPE_REDIS_QUEUE: redis://redis-queue:6379
 
   redis-queue:
     image: redis:6.2-alpine
@@ -182,7 +188,7 @@ services:
         condition: on-failure
 
   scheduler:
-    image: frappe/erpnext:v15.80.0
+    image: frappe/erpnext:v15.85.1
     networks:
       - frappe_network
     deploy:
@@ -196,7 +202,7 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   websocket:
-    image: frappe/erpnext:v15.80.0
+    image: frappe/erpnext:v15.85.1
     networks:
       - frappe_network
     deploy:
@@ -205,6 +211,9 @@ services:
     command:
       - node
       - /home/frappe/frappe-bench/apps/frappe/socketio.js
+    environment:
+      FRAPPE_REDIS_CACHE: redis://redis-cache:6379
+      FRAPPE_REDIS_QUEUE: redis://redis-queue:6379
     volumes:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
