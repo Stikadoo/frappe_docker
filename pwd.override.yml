@@ -1,13 +1,12 @@
 services:
   backend: 
     image: custom:15
+  frontend:
+    ports:
+      - "8081:8080"
   scheduler:
     image: custom:15
   queue-long:
     image: custom:15
   queue-short:
     image: custom:15
-  frontend:
-    ports: []
-    expose:
-      - "8080"
