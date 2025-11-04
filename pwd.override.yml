@@ -10,5 +10,6 @@ services:
   queue-short:
     image: custom:15
   frontend:
+    ports: []
     expose:
       - "8080"
