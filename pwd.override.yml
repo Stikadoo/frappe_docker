@@ -4,6 +4,7 @@ services:
   backend: 
     image: custom:15
   frontend:
+    ports: null
     expose: 
       - "8080"
   scheduler:
