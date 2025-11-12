@@ -2,6 +2,9 @@
 services:
   backend: 
     image: custom:15
+  frontend:
+    ports:  !override
+      - "8081:8080"
   scheduler:
     image: custom:15
   queue-long:
